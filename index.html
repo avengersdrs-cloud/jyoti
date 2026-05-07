@@ -191,6 +191,93 @@ body {
 }
 
 /* ══════════════════════════════════════════════
+   VOLUME CONTROL
+══════════════════════════════════════════════ */
+
+#volume-wrapper{
+  position:fixed;
+
+  bottom:95px;
+  right:22px;
+
+  z-index:5000;
+}
+
+/* Volume Icon */
+
+#volume-btn{
+  width:52px;
+  height:52px;
+
+  border-radius:50%;
+
+  border:2px solid var(--gold);
+
+  background:linear-gradient(
+    135deg,
+    var(--maroon),
+    var(--deep-maroon)
+  );
+
+  color:var(--gold-light);
+
+  font-size:22px;
+
+  cursor:pointer;
+
+  box-shadow:0 6px 24px rgba(74,14,26,0.45);
+
+  transition:all 0.3s;
+}
+
+#volume-btn:hover{
+  transform:scale(1.08);
+}
+
+/* Popup Slider */
+
+#volume-popup{
+  position:absolute;
+
+  bottom:62px;
+  right:0;
+
+  width:140px;
+
+  padding:14px;
+
+  border-radius:16px;
+
+  background:rgba(21,4,8,0.92);
+
+  border:1px solid rgba(201,146,42,0.35);
+
+  backdrop-filter:blur(10px);
+
+  opacity:0;
+  visibility:hidden;
+
+  transform:translateY(10px);
+
+  transition:all 0.3s;
+}
+
+/* Hover show */
+
+#volume-wrapper:hover #volume-popup{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+
+/* Slider */
+
+#volumeSlider{
+  width:100%;
+  cursor:pointer;
+}
+   
+/* ══════════════════════════════════════════════
    MUSIC BUTTON
 ══════════════════════════════════════════════ */
 #music-btn {
@@ -749,6 +836,20 @@ footer {
   .hero-names{
     font-size:44px;
   }
+#volume-wrapper{
+  bottom:78px;
+  right:12px;
+}
+
+#volume-btn{
+  width:48px;
+  height:48px;
+  font-size:19px;
+}
+
+#volume-popup{
+  width:120px;
+}
 
   /* LANGUAGE TOGGLE FIX */
   .lang-toggle{
@@ -817,6 +918,27 @@ footer {
 </div>
 
 <!-- ══════════════════ MUSIC ══════════════════ -->
+
+<div id="volume-wrapper">
+
+  <button id="volume-btn">
+    🔊
+  </button>
+
+  <div id="volume-popup">
+
+    <input 
+      type="range"
+      id="volumeSlider"
+      min="0"
+      max="100"
+      value="10"
+    >
+
+  </div>
+
+</div>
+   
 <div id="music-btn" onclick="toggleMusic()">
   🎵
   <div class="mwave" id="mwave"><span></span><span></span><span></span></div>
@@ -928,6 +1050,12 @@ footer {
 </div>
 <div class="g-slide" data-i="0">
   <img src="https://github.com/avengersdrs-cloud/jyoti/blob/main/images/SNV_6289.jpg.jpeg?raw=true" class="gallery-img">
+</div>
+<div class="g-slide" data-i="0">
+  <img src="https://github.com/avengersdrs-cloud/jyoti/blob/main/images/SAVE_20260507_230856.jpg.jpeg?raw=true" class="gallery-img">
+</div>
+<div class="g-slide" data-i="0">
+  <img src="https://github.com/avengersdrs-cloud/jyoti/blob/main/images/SAVE_20260507_230843.jpg.jpeg?raw=true" class="gallery-img">
 </div>
 <div class="g-slide" data-i="0">
   <img src="https://github.com/avengersdrs-cloud/jyoti/blob/main/images/SNV_6489.jpg.jpeg?raw=true" class="gallery-img">
@@ -1509,7 +1637,24 @@ function toggleMusic(){
     wave.style.display='none';
   }
 }
-   
+
+   /* ─── VOLUME CONTROL ─── */
+
+window.addEventListener('load',()=>{
+
+  const slider = document.getElementById('volumeSlider');
+
+  slider.addEventListener('input',()=>{
+
+    if(music){
+
+      music.volume = slider.value / 100;
+
+    }
+
+  });
+
+});
 
 </script>
 
