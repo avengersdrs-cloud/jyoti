@@ -1175,6 +1175,13 @@ tl.call(()=>{
     document.getElementById('music-btn').style.display='flex';
     initScratch();
     initCountdown();
+     setTimeout(()=>{
+
+  fadeInMusic();
+
+  musicOn = true;
+
+},700);
   })
 
   // 3. DRAMATIC OPEN — curtains sweep apart like a theatre
@@ -1342,62 +1349,6 @@ function setLang(lang){
   });
 }
 
-/* ─── BACKGROUND MUSIC (Web Audio API — shehnai-like drone) ─── */
-let audioCtx=null, musicOn=false, musicTimer=null, noteStep=0;
-const raagNotes=[261.6,293.7,311.1,349.2,392,415.3,466.2,523.3,587.3,622.3,698.5,783.9];
-const rhythmPattern=[0,2,4,5,7,9,7,5,4,2,0,2];
-
-function playNote(){
-  if(!audioCtx||!musicOn)return;
-  const freq=raagNotes[noteStep%raagNotes.length];
-  noteStep++;
-  // Lead tone (sawtooth through bandpass = nasal shehnai-like)
-  const osc=audioCtx.createOscillator();
-  const filt=audioCtx.createBiquadFilter();
-  const gain=audioCtx.createGain();
-  filt.type='bandpass'; filt.frequency.value=freq*1.8; filt.Q.value=4;
-  osc.type='sawtooth'; osc.frequency.value=freq;
-  osc.connect(filt); filt.connect(gain); gain.connect(audioCtx.destination);
-  const now=audioCtx.currentTime;
-  gain.gain.setValueAtTime(0,now);
-  gain.gain.linearRampToValueAtTime(0.055,now+0.06);
-  gain.gain.exponentialRampToValueAtTime(0.001,now+0.55);
-  osc.start(now); osc.stop(now+0.6);
-  // Tanpura drone every 4 beats
-  if(noteStep%4===0){
-    const d=audioCtx.createOscillator();
-    const dg=audioCtx.createGain();
-    d.type='sine'; d.frequency.value=130.8;
-    d.connect(dg); dg.connect(audioCtx.destination);
-    dg.gain.setValueAtTime(0.018,now);
-    dg.gain.exponentialRampToValueAtTime(0.001,now+1.6);
-    d.start(now); d.stop(now+1.7);
-  }
-}
-
-function toggleMusic(){
-  const btn=document.getElementById('music-btn');
-  const wave=document.getElementById('mwave');
-  if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-  if(!musicOn){
-    musicOn=true;
-    btn.innerHTML='🔊';
-    btn.appendChild(wave);
-    wave.style.display='flex';
-    btn.classList.remove('music-muted');
-    musicTimer=setInterval(playNote,400);
-    gsap.fromTo(btn,{scale:0.9},{scale:1,duration:0.35,ease:'back.out(2)'});
-  } else {
-    musicOn=false;
-    clearInterval(musicTimer);
-    btn.innerHTML='🔇';
-    btn.appendChild(wave);
-    wave.style.display='none';
-    btn.classList.add('music-muted');
-    gsap.to(btn,{scale:0.9,duration:0.2,yoyo:true,repeat:1});
-  }
-}
-
 /* ─── SCRATCH CARD ─── */
 function initScratch(){
   const canvas=document.getElementById('scratchCanvas');
@@ -1455,6 +1406,115 @@ function initCountdown(){
   tick(); setInterval(tick,1000);
 }
 
+/* ─── CUSTOM MUSIC ─── */
+
+let music;
+let musicOn = false;
+
+window.addEventListener('load',()=>{
+
+  music = document.getElementById('bgMusic');
+
+  if(music){
+
+    music.volume = 0.1; // 10% default volume
+
+  }
+
+});
+
+/* Fade In */
+function fadeInMusic(){
+
+  if(!music) return;
+
+  music.volume = 0;
+
+  music.play();
+
+  let vol = 0;
+
+  const fade = setInterval(()=>{
+
+    vol += 0.01;
+
+    if(vol >= 0.1){
+
+      vol = 0.1;
+
+      clearInterval(fade);
+
+    }
+
+    music.volume = vol;
+
+  },120);
+}
+
+/* Fade Out */
+function fadeOutMusic(){
+
+  if(!music) return;
+
+  let vol = music.volume;
+
+  const fade = setInterval(()=>{
+
+    vol -= 0.01;
+
+    if(vol <= 0){
+
+      vol = 0;
+
+      clearInterval(fade);
+
+      music.pause();
+
+    }
+
+    music.volume = vol;
+
+  },80);
+}
+
+/* Toggle Music */
+function toggleMusic(){
+
+  const btn = document.getElementById('music-btn');
+
+  const wave = document.getElementById('mwave');
+
+  if(!musicOn){
+
+    fadeInMusic();
+
+    musicOn = true;
+
+    btn.innerHTML='🔊';
+
+    btn.appendChild(wave);
+
+    wave.style.display='flex';
+
+  } else {
+
+    fadeOutMusic();
+
+    musicOn = false;
+
+    btn.innerHTML='🔇';
+
+    btn.appendChild(wave);
+
+    wave.style.display='none';
+  }
+}
+   
+
 </script>
+
+   <audio id="bgMusic" loop>
+  <source src="https://github.com/avengersdrs-cloud/jyoti/blob/main/images/song%20(1).mp3?raw=true" type="audio/mpeg">
+</audio>
 </body>
 </html>
