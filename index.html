@@ -261,10 +261,8 @@ body {
 
   transition:all 0.3s;
 }
-
-/* Hover show */
-
-#volume-wrapper:hover #volume-popup{
+   
+#volume-wrapper.active #volume-popup{
   opacity:1;
   visibility:visible;
   transform:translateY(0);
@@ -274,7 +272,41 @@ body {
 
 #volumeSlider{
   width:100%;
+  height:42px;
+
   cursor:pointer;
+
+  -webkit-appearance:none;
+
+  background:transparent;
+}
+
+/* Track */
+
+#volumeSlider::-webkit-slider-runnable-track{
+  height:6px;
+  border-radius:10px;
+  background:rgba(255,255,255,0.25);
+}
+
+/* Thumb */
+
+#volumeSlider::-webkit-slider-thumb{
+
+  -webkit-appearance:none;
+
+  width:22px;
+  height:22px;
+
+  border-radius:50%;
+
+  background:var(--gold-light);
+
+  margin-top:-8px;
+
+  cursor:pointer;
+
+  box-shadow:0 0 10px rgba(240,192,96,0.6);
 }
    
 /* ══════════════════════════════════════════════
@@ -848,7 +880,11 @@ footer {
 }
 
 #volume-popup{
-  width:120px;
+  width:170px;
+
+  padding:18px;
+
+  bottom:58px;
 }
 
   /* LANGUAGE TOGGLE FIX */
@@ -1655,6 +1691,36 @@ window.addEventListener('load',()=>{
   });
 
 });
+
+/* ─── VOLUME POPUP TOGGLE ─── */
+
+window.addEventListener('load',()=>{
+
+  const wrapper = document.getElementById('volume-wrapper');
+
+  const btn = document.getElementById('volume-btn');
+
+  btn.addEventListener('click',(e)=>{
+
+    e.stopPropagation();
+
+    wrapper.classList.toggle('active');
+
+  });
+
+  /* Click outside closes popup */
+
+  document.addEventListener('click',(e)=>{
+
+    if(!wrapper.contains(e.target)){
+
+      wrapper.classList.remove('active');
+
+    }
+
+  });
+
+});   
 
 </script>
 
