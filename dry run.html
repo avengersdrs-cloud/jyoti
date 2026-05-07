@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>शुभ विवाह — राहुल ❤ प्रिया</title>
+<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600&family=Hind:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+/* ══════════════════════════════════════════════
+   CSS VARIABLES & RESET
+══════════════════════════════════════════════ */
+:root {
+  --maroon:      #7B1C2E;
+  --deep-maroon: #4A0E1A;
+  --darkest:     #150408;
+  --gold:        #C9922A;
+  --gold-light:  #F0C060;
+  --gold-pale:   #FFF3D0;
+  --ivory:       #FDF6E3;
+  --cream:       #FAF0DC;
+  --saffron:     #E8630A;
+  --pink:        #D4527A;
+  --green:       #2D6A4F;
+  --text-dark:   #2C1810;
+  --text-gold:   #8B6914;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--darkest);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ══════════════════════════════════════════════
+   CURTAIN
+══════════════════════════════════════════════ */
+#curtain-overlay {
+  position: fixed; inset: 0; z-index: 9200;
+  display: none; pointer-events: none;
+}
+.curtain-panel {
+  width: 50%; height: 100%;
+  position: relative; overflow: hidden;
+  background: #5A0815;
+}
+/* Velvet fabric folds */
+.curtain-left::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    rgba(0,0,0,0.20) 18px,
+    rgba(255,255,255,0.04) 36px,
+    transparent 54px,
+    rgba(0,0,0,0.15) 72px,
+    transparent 90px
+  );
+}
+.curtain-right::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    rgba(255,255,255,0.04) 18px,
+    rgba(0,0,0,0.20) 36px,
+    transparent 54px,
+    rgba(255,255,255,0.03) 72px,
+    transparent 90px
+  );
+}
+/* Sheen overlay */
+.curtain-panel::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(240,192,96,0.14) 0%,
+    transparent 18%,
+    rgba(0,0,0,0.15) 55%,
+    rgba(0,0,0,0.45) 100%
+  );
+}
+/* Gold edge trim */
+.curtain-left  .c-edge { position:absolute; top:0; bottom:0; right:0; width:9px; background:linear-gradient(to bottom, var(--gold-light), var(--gold), var(--saffron), var(--gold), var(--gold-light)); box-shadow:0 0 18px rgba(201,146,42,0.7); z-index:2; }
+.curtain-right .c-edge { position:absolute; top:0; bottom:0; left:0;  width:9px; background:linear-gradient(to bottom, var(--gold-light), var(--gold), var(--saffron), var(--gold), var(--gold-light)); box-shadow:0 0 18px rgba(201,146,42,0.7); z-index:2; }
+
+/* Top pelmet bar */
+#curtain-top {
+  display: none;
+  position: fixed; top:0; left:0; right:0; height:90px; z-index:9300;
+  background: linear-gradient(to bottom, #2A0308 0%, #5A0815 65%, transparent 100%);
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 4px;
+  pointer-events: none;
+}
+.tassels { display:flex; gap:10px; align-items: flex-end; }
+.tassel { display:flex; flex-direction:column; align-items:center; }
+.tassel-rope { width:3px; border-radius:2px; background:linear-gradient(to bottom,var(--gold),var(--saffron)); }
+.tassel-ball { width:10px; height:10px; border-radius:50%; background:radial-gradient(circle at 35% 35%, var(--gold-light), var(--gold)); margin-top:2px; }
+
+/* ══════════════════════════════════════════════
+   INTRO SCREEN
+══════════════════════════════════════════════ */
+#intro-screen {
+  position: fixed; inset:0; z-index:9100;
+  background: radial-gradient(ellipse at center, #4A0E1A 0%, #150408 100%);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  overflow: hidden; cursor: pointer;
+}
+.intro-mandala {
+  position: absolute; border-radius:50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg, rgba(201,146,42,0.07) 6deg, transparent 12deg,
+    rgba(201,146,42,0.07) 18deg, transparent 24deg, rgba(201,146,42,0.07) 30deg, transparent 36deg,
+    rgba(201,146,42,0.06) 45deg, transparent 54deg, rgba(201,146,42,0.06) 90deg, transparent 96deg,
+    rgba(201,146,42,0.07) 135deg, transparent 141deg, rgba(201,146,42,0.06) 180deg, transparent 186deg,
+    rgba(201,146,42,0.07) 225deg, transparent 231deg, rgba(201,146,42,0.06) 270deg, transparent 276deg,
+    rgba(201,146,42,0.07) 315deg, transparent 321deg, rgba(201,146,42,0.06) 355deg, transparent 360deg
+  );
+  animation: mSpin 18s linear infinite;
+}
+.intro-mandala:nth-child(1){ width:540px; height:540px; opacity:0.5; }
+.intro-mandala:nth-child(2){ width:370px; height:370px; opacity:0.38; animation-duration:13s; animation-direction:reverse; }
+.intro-mandala:nth-child(3){ width:230px; height:230px; opacity:0.65; animation-duration:8s; }
+@keyframes mSpin { to { transform:rotate(360deg); } }
+
+.intro-diya {
+  font-size:74px; position:relative; z-index:1;
+  animation: dFlicker 2.2s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 24px rgba(201,146,42,0.85));
+  margin-bottom:10px;
+}
+@keyframes dFlicker {
+  0%  { transform:scale(1) rotate(-2deg);   filter:drop-shadow(0 0 16px rgba(232,99,10,0.7)); }
+  100%{ transform:scale(1.07) rotate(2deg); filter:drop-shadow(0 0 34px rgba(201,146,42,0.95)); }
+}
+.intro-title {
+  font-family:'Rozha One',serif;
+  color:var(--gold-light);
+  font-size:clamp(30px,8vw,62px);
+  letter-spacing:3px;
+  text-shadow:0 0 40px rgba(201,146,42,0.6);
+  position:relative; z-index:1;
+}
+.intro-sub {
+  font-family:'Playfair Display',serif; font-style:italic;
+  color:rgba(240,192,96,0.62);
+  font-size:clamp(11px,2.5vw,14px);
+  letter-spacing:5px; text-transform:uppercase;
+  margin:6px 0 46px; position:relative; z-index:1;
+}
+.tap-btn {
+  position:relative; z-index:1;
+  border:2px solid var(--gold);
+  padding:16px 46px;
+  color:var(--gold-light);
+  font-family:'Rozha One',serif;
+  font-size:clamp(14px,3.5vw,19px);
+  letter-spacing:3px;
+  background:rgba(201,146,42,0.1);
+  border-radius:2px;
+  animation:tapPulse 2.2s ease-in-out infinite;
+  backdrop-filter:blur(4px);
+  cursor:pointer; transition:all 0.3s;
+}
+.tap-btn::before,.tap-btn::after{ content:''; color:var(--gold); margin:0 10px; font-size:11px; }
+@keyframes tapPulse {
+  0%,100%{ box-shadow:0 0 0 0 rgba(201,146,42,0.4),0 0 0 8px rgba(201,146,42,0.1); }
+  50%    { box-shadow:0 0 0 8px rgba(201,146,42,0.25),0 0 0 18px rgba(201,146,42,0.06); }
+}
+
+/* Petals */
+.floating-petals { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+.petal {
+  position:absolute; font-size:20px;
+  animation:fallPetal linear infinite; opacity:0.75;
+}
+@keyframes fallPetal {
+  0%  { transform:translateY(-60px) rotate(0deg);   opacity:0; }
+  10% { opacity:0.9; }
+  90% { opacity:0.5; }
+  100%{ transform:translateY(110vh) rotate(720deg); opacity:0; }
+}
+
+/* ══════════════════════════════════════════════
+   MUSIC BUTTON
+══════════════════════════════════════════════ */
+#music-btn {
+  position:fixed; bottom:28px; right:22px; z-index:5000;
+  width:56px; height:56px; border-radius:50%;
+  background:linear-gradient(135deg,var(--maroon),var(--deep-maroon));
+  border:2px solid var(--gold);
+  color:var(--gold-light); font-size:22px;
+  display:none; align-items:center; justify-content:center;
+  cursor:pointer;
+  box-shadow:0 6px 24px rgba(74,14,26,0.55);
+  transition:transform 0.3s;
+  animation:musicGlow 3s ease-in-out infinite;
+}
+#music-btn:hover{ transform:scale(1.12); }
+@keyframes musicGlow {
+  0%,100%{ box-shadow:0 6px 24px rgba(74,14,26,0.55),0 0 0 0 rgba(201,146,42,0.4); }
+  50%    { box-shadow:0 6px 24px rgba(74,14,26,0.55),0 0 0 9px rgba(201,146,42,0.15); }
+}
+.mwave { display:flex; align-items:center; gap:2px; position:absolute; bottom:-1px; left:50%; transform:translateX(-50%); }
+.mwave span { display:block; width:3px; height:8px; border-radius:2px; background:var(--gold); animation:wBar 0.8s ease-in-out infinite alternate; }
+.mwave span:nth-child(2){ animation-delay:0.15s; height:13px; }
+.mwave span:nth-child(3){ animation-delay:0.30s; height:6px; }
+@keyframes wBar { from{transform:scaleY(0.35)} to{transform:scaleY(1)} }
+.music-muted .mwave { display:none; }
+
+/* ══════════════════════════════════════════════
+   LANGUAGE TOGGLE
+══════════════════════════════════════════════ */
+.lang-toggle {
+  position:fixed; top:20px; right:20px; z-index:5001;
+  display:none; gap:4px;
+  background:rgba(21,4,8,0.92);
+  border:1px solid rgba(201,146,42,0.45);
+  border-radius:30px; padding:4px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.45);
+  backdrop-filter:blur(14px);
+}
+.lang-btn {
+  padding:7px 18px; border-radius:20px; border:none;
+  cursor:pointer; font-size:13px; font-weight:500;
+  transition:all 0.3s; background:transparent;
+  color:rgba(240,192,96,0.6); font-family:'Poppins',sans-serif;
+}
+.lang-btn.active{ background:var(--gold); color:var(--deep-maroon); font-weight:700; }
+
+/* ══════════════════════════════════════════════
+   MAIN CONTENT
+══════════════════════════════════════════════ */
+#main-content { display:none; background:var(--ivory); min-height:100vh; }
+#main-content.visible { display:block; }
+
+/* ══════════════════════════════════════════════
+   GOLD DECO BAR
+══════════════════════════════════════════════ */
+.deco-bar {
+  height:7px;
+  background:linear-gradient(to right,var(--deep-maroon),var(--maroon),var(--gold),var(--saffron),var(--gold),var(--maroon),var(--deep-maroon));
+}
+
+/* ══════════════════════════════════════════════
+   HERO
+══════════════════════════════════════════════ */
+.hero {
+  background:linear-gradient(168deg,var(--deep-maroon) 0%,#5C1120 34%,var(--maroon) 64%,#8B2232 100%);
+  position:relative; min-height:100vh;
+  padding:110px 24px 90px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; overflow:hidden;
+}
+.hero-bg {
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(circle at 14% 14%, rgba(201,146,42,0.08) 0%, transparent 44%),
+    radial-gradient(circle at 86% 86%, rgba(201,146,42,0.08) 0%, transparent 44%),
+    radial-gradient(circle at 50% 50%, rgba(201,146,42,0.04) 0%, transparent 55%);
+}
+.fc { position:absolute; font-size:54px; opacity:0.14; pointer-events:none; filter:drop-shadow(0 0 10px rgba(201,146,42,0.4)); }
+.fc-tl{ top:20px; left:20px;  transform:rotate(-45deg); }
+.fc-tr{ top:20px; right:20px; transform:rotate(45deg);  }
+.fc-bl{ bottom:20px; left:20px;  transform:rotate(-135deg); }
+.fc-br{ bottom:20px; right:20px; transform:rotate(135deg);  }
+
+.hero-om {
+  font-size:62px; color:var(--gold-light);
+  animation:omGlow 3.5s ease-in-out infinite alternate;
+  margin-bottom:10px;
+}
+@keyframes omGlow {
+  from{ filter:drop-shadow(0 0 12px rgba(201,146,42,0.55)); }
+  to  { filter:drop-shadow(0 0 30px rgba(201,146,42,0.98)) drop-shadow(0 0 55px rgba(232,99,10,0.4)); }
+}
+.hero-shubh {
+  font-family:'Playfair Display',serif; font-style:italic;
+  color:rgba(240,192,96,0.72);
+  font-size:clamp(13px,2.5vw,17px);
+  letter-spacing:5px; margin-bottom:18px;
+}
+.hero-names {
+  font-family:'Rozha One',serif; color:var(--gold-light);
+  font-size:clamp(46px,10vw,92px); line-height:1.1;
+  text-shadow:2px 4px 26px rgba(0,0,0,0.45),0 0 55px rgba(201,146,42,0.25);
+}
+.hero-weds {
+  font-family:'Playfair Display',serif; font-style:italic;
+  color:var(--gold); font-size:clamp(18px,4vw,30px);
+  margin:10px 0 6px; opacity:0.92;
+}
+.hdiv { display:flex; align-items:center; gap:16px; margin:24px auto; width:fit-content; }
+.hl,.hr { height:1px; width:90px; }
+.hl { background:linear-gradient(to right,transparent,var(--gold)); }
+.hr { background:linear-gradient(to left,transparent,var(--gold)); }
+.hero-date {
+  color:rgba(240,192,96,0.82);
+  font-size:clamp(14px,3vw,20px);
+  font-family:'Playfair Display',serif;
+  letter-spacing:2px; margin-top:10px;
+}
+.hero-parents {
+  margin-top:34px;
+  color:rgba(240,192,96,0.58);
+  font-size:clamp(12px,2.5vw,14px);
+  line-height:2.3; font-family:'Hind',sans-serif; font-weight:300;
+}
+.hero-parents span { color:rgba(240,192,96,0.9); font-weight:600; }
+
+/* ══════════════════════════════════════════════
+   HERO GALLERY  (right after hero)
+══════════════════════════════════════════════ */
+.gallery-section {
+  background:linear-gradient(180deg,var(--deep-maroon) 0%,#150408 100%);
+  padding:0 0 70px; overflow:hidden; position:relative;
+}
+.gallery-header {
+  text-align:center; padding:60px 20px 36px;
+}
+.gallery-header h2 {
+  font-family:'Rozha One',serif; font-size:clamp(24px,5vw,42px);
+  color:var(--gold-light); margin-bottom:8px;
+}
+.gallery-header p {
+  color:rgba(240,192,96,0.5); font-size:12px;
+  letter-spacing:1px; text-transform:uppercase;
+  font-family:'Playfair Display',serif; font-style:italic;
+}
+
+.gallery-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* Carousel */
+.g-carousel { position:relative; overflow:hidden; touch-action:pan-y; user-select:none; }
+.g-track {
+  display:flex; gap:18px; padding:0 28px;
+  transition:transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+  will-change:transform;
+}
+.g-slide {
+  flex:0 0 clamp(255px,68vw,480px);
+  height:clamp(210px,48vw,370px);
+  border-radius:22px; overflow:hidden;
+  position:relative;
+  box-shadow:0 18px 55px rgba(0,0,0,0.58);
+  border:2px solid rgba(201,146,42,0.18);
+  cursor:grab; transition:transform 0.4s,border-color 0.4s,box-shadow 0.4s;
+}
+.g-slide:active{ cursor:grabbing; }
+.g-slide.g-active {
+  border-color:rgba(201,146,42,0.55);
+  box-shadow:0 22px 65px rgba(0,0,0,0.75),0 0 0 1px rgba(201,146,42,0.32);
+  transform:scale(1.035);
+}
+
+.gsb { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; }
+.gsb-1{ background-image: url("E:\New folder\Jyoti's Engagement\New folder\SNV_6289.JPG"); }
+.gsb-2{ background:linear-gradient(135deg, #1B4332, #2D6A4F 55%, #52B788); }
+.gsb-3{ background:linear-gradient(135deg,#3D2B7A,#6A0F5A 55%,#9B2D7A); }
+.gsb-4{ background:linear-gradient(135deg,#1B6B6B,#2D9D9D 55%,#52C8C8); }
+.gsb-5{ background:linear-gradient(135deg,#8B4513,#C9922A 55%,#F0C060); }
+.gsb-6{ background:linear-gradient(135deg,#2C0A3A,#6B1A8A 55%,#D4527A); }
+.gsb-7{ background:linear-gradient(135deg,#0A2040,#1A4A9A 55%,#3A7AE0); }
+
+.gsb-icon { font-size:clamp(46px,10vw,78px); margin-bottom:14px; filter:drop-shadow(0 4px 14px rgba(0,0,0,0.3)); }
+.gsb-label {
+  font-family:'Rozha One',serif;
+  font-size:clamp(20px,4vw,30px);
+  color:rgba(255,255,255,0.92);
+  text-shadow:0 2px 14px rgba(0,0,0,0.55);
+}
+
+
+
+.g-arrows { display:flex; justify-content:center; gap:16px; margin-top:30px; }
+.g-arrow {
+  width:48px; height:48px; border-radius:50%;
+  background:rgba(74,14,26,0.7); border:1px solid rgba(201,146,42,0.42);
+  color:var(--gold-light); font-size:24px;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:all 0.3s; backdrop-filter:blur(6px);
+}
+.g-arrow:hover{ background:var(--maroon); border-color:var(--gold); transform:scale(1.1); }
+.g-dots { display:flex; justify-content:center; gap:8px; margin-top:18px; }
+.g-dot {
+  width:8px; height:8px; border-radius:50%;
+  background:rgba(201,146,42,0.3); cursor:pointer; transition:all 0.35s;
+}
+.g-dot.active{ background:var(--gold); width:28px; border-radius:4px; }
+
+/* ══════════════════════════════════════════════
+   SECTION COMMONS
+══════════════════════════════════════════════ */
+.section { padding:80px 24px; position:relative; }
+.sec-title {
+  font-family:'Rozha One',serif;
+  font-size:clamp(26px,5vw,44px);
+  text-align:center; color:var(--maroon); margin-bottom:8px;
+}
+.sec-sub {
+  text-align:center; color:var(--text-gold);
+  font-size:12px; letter-spacing:1px; text-transform:uppercase;
+  font-family:'Playfair Display',serif; font-style:italic; margin-bottom:14px;
+}
+.gold-rule {
+  display:flex; align-items:center; justify-content:center; gap:14px;
+  margin-bottom:52px;
+}
+.gold-rule::before,.gold-rule::after {
+  content:''; height:1px; width:70px;
+}
+.gold-rule::before{ background:linear-gradient(to right,transparent,var(--gold)); }
+.gold-rule::after { background:linear-gradient(to left,transparent,var(--gold)); }
+.gri { color:var(--gold); font-size:18px; }
+
+/* Dark section adjustments */
+.dark-sec .sec-title { color:var(--gold-light); }
+.dark-sec .sec-sub   { color:rgba(240,192,96,0.52); }
+.dark-sec .gold-rule::before{ background:linear-gradient(to right,transparent,rgba(201,146,42,0.55)); }
+.dark-sec .gold-rule::after { background:linear-gradient(to left,transparent,rgba(201,146,42,0.55)); }
+
+/* ══════════════════════════════════════════════
+   TIMELINE
+══════════════════════════════════════════════ */
+.timeline-section {
+  background:linear-gradient(162deg,var(--deep-maroon) 0%,#380510 58%,var(--deep-maroon) 100%);
+  padding:80px 24px;
+}
+.tl-wrap { max-width:820px; margin:0 auto; position:relative; }
+/* Central spine */
+.tl-wrap::before {
+  content:''; position:absolute;
+  left:50%; top:0; bottom:0; width:2px;
+  transform:translateX(-50%);
+  background:linear-gradient(to bottom,transparent,rgba(201,146,42,0.38) 8%,rgba(201,146,42,0.38) 92%,transparent);
+}
+.tl-item {
+  display:flex; align-items:flex-start;
+  margin-bottom:52px; position:relative;
+}
+.tl-item:nth-child(odd)  { flex-direction:row; }
+.tl-item:nth-child(even) { flex-direction:row-reverse; }
+
+.tl-card {
+  flex:0 0 calc(50% - 44px);
+  background:rgba(255,255,255,0.045);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(201,146,42,0.18);
+  border-radius:18px; padding:22px 24px;
+  position:relative;
+  transition:transform 0.35s,box-shadow 0.35s;
+}
+.tl-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 18px 45px rgba(0,0,0,0.45),0 0 0 1px rgba(201,146,42,0.3);
+}
+/* Triangle pointer */
+.tl-item:nth-child(odd)  .tl-card { margin-right:44px; }
+.tl-item:nth-child(even) .tl-card { margin-left:44px;  }
+.tl-item:nth-child(odd)  .tl-card::after {
+  content:''; position:absolute; right:-11px; top:22px;
+  border:11px solid transparent; border-left-color:rgba(201,146,42,0.2);
+}
+.tl-item:nth-child(even) .tl-card::after {
+  content:''; position:absolute; left:-11px; top:22px;
+  border:11px solid transparent; border-right-color:rgba(201,146,42,0.2);
+}
+
+.tl-dot {
+  position:absolute; left:50%; transform:translateX(-50%);
+  width:46px; height:46px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px; z-index:2;
+  border:2px solid rgba(201,146,42,0.45);
+  box-shadow:0 0 0 7px rgba(56,5,16,0.88),0 0 22px rgba(201,146,42,0.28);
+  background:var(--deep-maroon);
+}
+
+.tl-ev-name {
+  font-family:'Rozha One',serif;
+  font-size:clamp(16px,3vw,21px);
+  margin-bottom:7px;
+}
+.tl-date  { font-size:14px; font-weight:600; letter-spacing:1.5px; font-family:'Playfair Display',serif; }
+.tl-time  { font-size:11px; font-weight:300; margin:3px 0 7px; }
+.tl-place { font-size:12px; display:flex; align-items:center; gap:5px; }
+.tl-desc  { font-size:12px; line-height:1.65; margin-top:9px; font-family:'Hind',sans-serif; }
+
+.tl-card .tl-date,.tl-card .tl-place,.tl-card .tl-desc { color:rgba(240,192,96,0.88); }
+.tl-card .tl-time { color:rgba(244, 234, 125, 0.88); }
+
+/* Per-event colours */
+.ev-haldi    .tl-dot{background:linear-gradient(135deg,#F5A623,#E8630A);}  .ev-haldi    .tl-ev-name{color:#F9B84A;}
+.ev-mehendi  .tl-dot{background:linear-gradient(135deg,#2D6A4F,#1B4332);}  .ev-mehendi  .tl-ev-name{color:#52B788;}
+.ev-sangeet  .tl-dot{background:linear-gradient(135deg,#9B2D7A,#6A0F5A);}  .ev-sangeet  .tl-ev-name{color:#D4527A;}
+.ev-satsang  .tl-dot{background:linear-gradient(135deg,#1B6B6B,#0D4444);}  .ev-satsang  .tl-ev-name{color:#52C8C8;}
+.ev-mandap   .tl-dot{background:linear-gradient(135deg,#C9922A,#8B6914);}  .ev-mandap   .tl-ev-name{color:#f89377;}
+.ev-vivah    .tl-dot{background:linear-gradient(135deg,#9B2232,#4A0E1A); border-color:var(--gold);} .ev-vivah .tl-ev-name{color:var(--gold-light);} .ev-vivah .tl-card{border-color:rgba(201,146,42,0.45);background:rgba(201,146,42,0.07);}
+.ev-reception.tl-dot{background:linear-gradient(135deg,#3D2B7A,#1E1450);}  .ev-reception .tl-ev-name{
+  color: #57afdb;
+}
+
+
+/* Mobile: single column */
+@media(max-width:680px){
+  .tl-wrap::before{ left:24px; }
+  .tl-item,.tl-item:nth-child(even){ flex-direction:row; }
+  .tl-dot{ left:24px; }
+  .tl-item:nth-child(odd)  .tl-card{ margin-right:0; margin-left:66px; flex:1; }
+  .tl-item:nth-child(even) .tl-card{ margin-left:66px; flex:1; }
+  .tl-item:nth-child(odd)  .tl-card::after{ display:none; }
+  .tl-item:nth-child(even) .tl-card::after{ left:-11px; border-right-color:rgba(201,146,42,0.2); border-left-color:transparent; display:block; }
+}
+
+/* ══════════════════════════════════════════════
+   SCRATCH CARD
+══════════════════════════════════════════════ */
+.scratch-section {
+  background:linear-gradient(135deg,var(--maroon),var(--deep-maroon),#380510);
+  padding:80px 24px; text-align:center; overflow:hidden;
+}
+.scratch-box {
+  position:relative; width:300px; height:172px;
+  margin:0 auto; border-radius:18px; overflow:hidden;
+  box-shadow:0 14px 55px rgba(0,0,0,0.6),0 0 0 3px var(--gold);
+  cursor:crosshair;
+}
+.scratch-reveal {
+  position:absolute; inset:0;
+  background:linear-gradient(135deg,#150408,#4A0E1A);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  color:var(--gold-light); text-align:center; padding:16px;
+}
+.s-date-big { font-family:'Rozha One',serif; font-size:42px; color:var(--gold-light); text-shadow:0 0 26px rgba(201,146,42,0.75); line-height:1.1; }
+.s-date-day { font-size:13px; color:rgba(240,192,96,0.62); letter-spacing:3px; margin-top:8px; font-family:'Playfair Display',serif; font-style:italic; }
+.scratch-canvas { position:absolute; inset:0; touch-action:none; }
+.scratch-hint { color:rgba(240,192,96,0.52); font-size:13px; margin-top:18px; font-style:italic; animation:blinkHint 2s ease-in-out infinite; }
+@keyframes blinkHint { 0%,100%{opacity:0.52} 50%{opacity:1} }
+
+/* ══════════════════════════════════════════════
+   COUNTDOWN
+══════════════════════════════════════════════ */
+.countdown-section { background:var(--cream); padding:40px 24px; text-align:center; }
+.cd-grid { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:38px; }
+.cd-item {
+  background:linear-gradient(135deg,var(--maroon),var(--deep-maroon));
+  color:var(--gold-light); border-radius:16px;
+  padding:22px 26px; min-width:96px;
+  box-shadow:0 10px 30px rgba(74,14,26,0.22);
+  border:1px solid rgba(201,146,42,0.24);
+  position:relative; overflow:hidden;
+}
+.cd-item::before{ content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(201,146,42,0.1),transparent); pointer-events:none; }
+.cd-num { font-family:'Rozha One',serif; font-size:50px; line-height:1; display:block; text-shadow:0 2px 14px rgba(0,0,0,0.3); }
+.cd-lbl { font-size:10px; letter-spacing:2.5px; text-transform:uppercase; opacity:0.68; display:block; margin-top:5px; }
+.cd-sep { font-family:'Rozha One',serif; font-size:46px; color:var(--maroon); align-self:center; opacity:0.32; }
+
+/* ══════════════════════════════════════════════
+   EVENT CARDS
+══════════════════════════════════════════════ */
+.events-section { background:linear-gradient(162deg,#FDF6E3,#FAF0DC,#FDF6E3); padding:80px 24px; overflow:hidden; }
+.ev-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(285px,1fr)); gap:26px; max-width:980px; margin:0 auto; }
+.ev-card {
+  border-radius:22px; overflow:hidden;
+  box-shadow:0 14px 46px rgba(74,14,26,0.13);
+  transition:transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275),box-shadow 0.4s;
+}
+.ev-card:hover{ transform:translateY(-18px) scale(1.03); box-shadow:0 30px 68px rgba(74,14,26,0.22); }
+.ev-hdr { padding:34px 26px 22px; position:relative; overflow:hidden; }
+.ev-hdr::after{ content:''; position:absolute; bottom:0; left:0; right:0; height:50%; background:linear-gradient(to top,rgba(0,0,0,0.22),transparent); pointer-events:none; }
+.ev-emoji { font-size:50px; display:block; margin-bottom:12px; position:relative; z-index:1; }
+.ev-name  { font-family:'Rozha One',serif; font-size:23px; color:white; text-shadow:0 2px 10px rgba(0,0,0,0.25); margin-bottom:3px; position:relative; z-index:1; }
+.ev-name-en { font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,0.68); font-family:'Playfair Display',serif; font-style:italic; position:relative; z-index:1; }
+.ev-body { padding:18px 26px 22px; background:white; }
+.ev-row { display:flex; align-items:center; gap:8px; color:var(--text-dark); font-size:13px; margin-bottom:6px; }
+.ev-row span:first-child{ color:var(--text-gold); }
+.ev-desc-txt { font-size:12px; color:#aaa; line-height:1.65; font-family:'Hind',sans-serif; margin-top:8px; }
+
+.hdr-haldi    { background:linear-gradient(135deg,#F5A623,#E8630A,#C47008); }
+.hdr-mehendi  { background:linear-gradient(135deg,#2D6A4F,#1B4332,#0D2B22); }
+.hdr-sangeet  { background:linear-gradient(135deg,#9B2D7A,#6A0F5A,#3D0038); }
+.hdr-satsang  { background:linear-gradient(135deg,#1B6B6B,#0D4444,#062B2B); }
+.hdr-mandap   { background:linear-gradient(135deg,#C9922A,#8B6914,#5A4408); }
+.hdr-vivah    { background:linear-gradient(135deg,#9B2232,#7B1C2E,#4A0E1A); }
+.hdr-reception{ background:linear-gradient(135deg,#3D2B7A,#261968,#110B3A); }
+
+/* ══════════════════════════════════════════════
+   CALENDAR
+══════════════════════════════════════════════ */
+.calendar-section{ background:var(--ivory); padding:80px 24px; }
+.cal-wrap {
+  max-width:430px; margin:0 auto; background:white;
+  border-radius:22px; overflow:hidden;
+  box-shadow:0 22px 68px rgba(74,14,26,0.14);
+  border:1px solid rgba(201,146,42,0.17);
+}
+.cal-hdr { background:linear-gradient(135deg,var(--maroon),var(--deep-maroon)); color:var(--gold-light); padding:26px; text-align:center; }
+.cal-month{ font-family:'Rozha One',serif; font-size:31px; }
+.cal-year { font-size:13px; opacity:0.62; letter-spacing:4px; margin-top:2px; }
+.cal-grid { display:grid; grid-template-columns:repeat(7,1fr); padding:18px; }
+.cal-dname { text-align:center; font-size:10px; font-weight:700; color:var(--text-gold); letter-spacing:1px; padding:8px 0; text-transform:uppercase; }
+.cal-d { text-align:center; padding:11px 4px; font-size:14px; color:var(--text-dark); border-radius:8px; }
+.cal-d.range{ background:rgba(201,146,42,0.09); }
+.cal-d.wedding{
+  background:linear-gradient(135deg,var(--maroon),var(--deep-maroon));
+  color:var(--gold-light) !important; font-weight:700; font-size:17px;
+  box-shadow:0 5px 20px rgba(74,14,26,0.42);
+  position:relative; animation:calRing 2.2s ease-in-out infinite;
+}
+@keyframes calRing{ 0%,100%{box-shadow:0 5px 20px rgba(74,14,26,0.42)} 50%{box-shadow:0 5px 32px rgba(201,146,42,0.55)} }
+.cal-d.wedding::after{ content:'❤️'; position:absolute; top:-21px; left:50%; transform:translateX(-50%); font-size:13px; animation:ringBob 1s ease-in-out infinite alternate; }
+@keyframes ringBob{ from{transform:translateX(-50%) translateY(0)} to{transform:translateX(-50%) translateY(-5px)} }
+
+/* ══════════════════════════════════════════════
+   DRESS CODE
+══════════════════════════════════════════════ */
+.dresscode-section{ background:var(--cream); padding:80px 24px; text-align:center; }
+.dress-grid{ display:flex; flex-wrap:wrap; gap:22px; justify-content:center; max-width:650px; margin:0 auto; }
+.dress-card{
+  flex:1 1 155px; background:white; border-radius:18px;
+  padding:28px 18px; box-shadow:0 8px 32px rgba(74,14,26,0.08);
+  border:1px solid rgba(201,146,42,0.14);
+  transition:transform 0.3s,box-shadow 0.3s;
+}
+.dress-card:hover{ transform:translateY(-8px); box-shadow:0 20px 52px rgba(74,14,26,0.14); }
+.dc-icon  { font-size:38px; display:block; margin-bottom:10px; }
+.dc-event { font-family:'Rozha One',serif; color:var(--maroon); font-size:16px; margin-bottom:4px; }
+.dc-code  { font-size:11px; color:var(--text-gold); letter-spacing:2px; text-transform:uppercase; }
+.dc-swatches{ display:flex; gap:7px; justify-content:center; margin-top:10px; }
+.swatch{ width:17px; height:17px; border-radius:50%; border:2px solid white; box-shadow:0 2px 8px rgba(0,0,0,0.18); }
+
+/* ══════════════════════════════════════════════
+   MAP
+══════════════════════════════════════════════ */
+.map-section{ background:var(--ivory); padding: 10px 24px; }
+.map-wrap {
+  max-width:720px; margin:0 auto; border-radius:22px; overflow:hidden;
+  box-shadow:0 22px 68px rgba(74,14,26,0.14);
+  border:3px solid rgba(201,146,42,0.28);
+}
+.map-wrap iframe{ width:100%; height:400px; border:none; display:block; }
+.venue-bar {
+  background:linear-gradient(135deg,var(--maroon),var(--deep-maroon));
+  padding:26px 30px; color:var(--gold-light);
+  display:flex; flex-wrap:wrap; gap:22px;
+  align-items:center; justify-content:center;
+}
+.v-item{ text-align:center; }
+.v-icon{ font-size:26px; display:block; margin-bottom:5px; }
+.v-label{ font-size:10px; letter-spacing:2.5px; text-transform:uppercase; opacity:0.58; }
+.v-val{ font-family:'Rozha One',serif; font-size:20px; margin-top:3px; }
+
+/* ══════════════════════════════════════════════
+   BLESSINGS
+══════════════════════════════════════════════ */
+.blessings-section {
+  background:linear-gradient(135deg,var(--maroon),var(--deep-maroon));
+  padding:90px 24px; text-align:center; position:relative; overflow:hidden;
+}
+.blessings-section::before{
+  content:'❝'; position:absolute; top:30px; left:40px;
+  font-size:100px; color:rgba(201,146,42,0.1); font-family:serif; line-height:1;
+}
+.bl-quote{
+  font-family:'Rozha One',serif; color:var(--gold-light);
+  font-size:clamp(19px,4vw,30px); line-height:1.8;
+  max-width:640px; margin:0 auto;
+  text-shadow:0 0 24px rgba(201,146,42,0.28);
+  position:relative; z-index:1;
+}
+.bl-sub{ color:rgba(240,192,96,0.42); font-size:12px; letter-spacing:1px; margin-top:26px; text-transform:uppercase; font-family:'Playfair Display',serif; font-style:italic; position:relative; z-index:1; }
+
+/* ══════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════ */
+footer {
+  background:var(--darkest); padding:60px 24px 36px;
+  text-align:center; color:rgba(240,192,96,0.52);
+  font-size:13px; font-family:'Hind',serif;
+}
+.ft-names{ font-family:'Rozha One',serif; font-size:32px; color:var(--gold-light); margin-bottom:8px; }
+.ft-date { color:rgba(240,192,96,0.42); font-size:12px; letter-spacing:4px; margin-bottom:28px; }
+.ft-rule { width:72px; height:1px; background:linear-gradient(to right,transparent,var(--gold),transparent); margin:24px auto; }
+.ft-emoji{ font-size:30px; margin-bottom:12px; }
+
+/* ══════════════════════════════════════════════
+   TRANSLATE
+══════════════════════════════════════════════ */
+[data-hi],[data-en]{ display:none; }
+.lang-hi [data-hi]{ display:block; }
+.lang-hi [data-hi-i]{ display:inline; }
+.lang-en [data-en]{ display:block; }
+.lang-en [data-en-i]{ display:inline; }
+[data-hi-i],[data-en-i]{ display:none; }
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════ */
+@media(max-width:600px){
+  .ev-grid{ grid-template-columns:1fr; }
+  .cd-grid{ gap:10px; }
+  .cd-item{ min-width:76px; padding:18px 14px; }
+  .cd-num { font-size:36px; }
+  .g-track{ padding:0 16px; }
+  .hero-names{ font-size:44px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ CURTAIN ══════════════════ -->
+<div id="curtain-overlay">
+  <div class="curtain-panel curtain-left" id="cLeft"><div class="c-edge"></div></div>
+  <div class="curtain-panel curtain-right" id="cRight"><div class="c-edge"></div></div>
+</div>
+<div id="curtain-top">
+  <div class="tassels">
+    <div class="tassel"><div class="tassel-rope" style="height:50px"></div><div class="tassel-ball"></div></div>
+    <div class="tassel"><div class="tassel-rope" style="height:64px"></div><div class="tassel-ball"></div></div>
+    <div class="tassel"><div class="tassel-rope" style="height:42px"></div><div class="tassel-ball"></div></div>
+    <div class="tassel"><div class="tassel-rope" style="height:70px"></div><div class="tassel-ball"></div></div>
+    <div class="tassel"><div class="tassel-rope" style="height:38px"></div><div class="tassel-ball"></div></div>
+    <div class="tassel"><div class="tassel-rope" style="height:58px"></div><div class="tassel-ball"></div></div>
+    <div class="tassel"><div class="tassel-rope" style="height:46px"></div><div class="tassel-ball"></div></div>
+    <div class="tassel"><div class="tassel-rope" style="height:65px"></div><div class="tassel-ball"></div></div>
+    <div class="tassel"><div class="tassel-rope" style="height:42px"></div><div class="tassel-ball"></div></div>
+  </div>
+</div>
+
+<!-- ══════════════════ INTRO ══════════════════ -->
+<div id="intro-screen">
+  <div class="floating-petals" id="petals"></div>
+  <div class="intro-mandala"></div>
+  <div class="intro-mandala"></div>
+  <div class="intro-mandala"></div>
+  <div class="intro-diya"><img src="C:\Users\lucky\Downloads\—Pngtree—lord ganesha illustration with shree_8901890 (1).png" alt="image" width="300px" height="300px" style="position: relative; top: 60px;"></div>
+  <div class="intro-title">शुभ विवाह</div>
+  <div class="intro-sub">Wedding Invitation</div>
+  <div class="tap-btn" onclick="openInvitation()">✦ निमंत्रण खोलें ✦<br>✦ Open Invitation ✦</div>
+</div>
+
+<!-- ══════════════════ MUSIC ══════════════════ -->
+<div id="music-btn" onclick="toggleMusic()">
+  🎵
+  <div class="mwave" id="mwave"><span></span><span></span><span></span></div>
+</div>
+
+<!-- ══════════════════ LANG ══════════════════ -->
+<div class="lang-toggle" id="langToggle">
+  <button class="lang-btn active" onclick="setLang('hi')">हिंदी</button>
+  <button class="lang-btn" onclick="setLang('en')">English</button>
+</div>
+
+<!-- ══════════════════ MAIN ══════════════════ -->
+<div id="main-content" class="lang-hi">
+
+  <div class="deco-bar"></div>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="fc fc-tl">🌸</div><div class="fc fc-tr">🌸</div>
+    <div class="fc fc-bl">🌸</div><div class="fc fc-br">🌸</div>
+
+    <div class="hero-om hEl">ॐ</div>
+    <div class="hero-shubh hEl">
+      <span data-hi-i>॥ शुभ विवाह ॥</span><span data-en-i>॥ Auspicious Wedding ॥</span>
+    </div>
+    <div class="hero-names hEl">
+      <span data-hi-i>ज्योति</span><span data-en-i>Jyoti</span>
+    </div>
+    <div class="hero-weds hEl">
+      <span data-hi-i>❤ संग ❤</span><span data-en-i>❤ weds ❤</span>
+    </div>
+    <div class="hero-names hEl">
+      <span data-hi-i>चंदन</span><span data-en-i>Chandan</span>
+    </div>
+    <div class="hdiv hEl">
+      <div class="hl"></div><span style="color:var(--gold-light);font-size:22px;">🌸</span><div class="hr"></div>
+    </div>
+    <div class="hero-date hEl">
+      <span data-hi-i>🗓 12 मई 2026 &nbsp;|&nbsp; ज्येष्ठ कृष्ण पक्ष, दशमी</span>
+      <span data-en-i>🗓 12 May 2026 &nbsp;|&nbsp; Jyeshtha Krishna Paksha, Dashami</span>
+    </div>
+    <div class="hero-parents hEl">
+      <div data-hi>ज्येष्ठ सुपुत्री <span>श्रीमति आशा कुमारी</span> एवं <span>श्री जीतेन्द्र कुमार पंजियारा (पप्पू)</span><br>कनिष्ठ सुपुत्र <span>श्रीमति उषा देवी</span> एवं <span>श्री मन्नू प्रसाद साह</span></div>
+      <div data-en>Daughter of: <span>Smt. Asha Kumari</span> &amp; <span>Shri Jitendra Kumar Panjiyara(Pappu)</span><br>Son of: <span>Smt. Usha Devi</span> &amp; <span>Shri Mannu Prasad Sah</span></div>
+    </div>
+  </section>
+
+    <!-- ── SCRATCH ── -->
+  <section class="scratch-section dark-sec">
+    <h2 class="sec-title st"><span data-hi>खरोंचकर तिथि जानें</span><span data-en>Scratch to Reveal Date</span></h2>
+    <p  class="sec-sub  st"><span data-hi>उँगली से खरोंचें</span><span data-en>scratch with your finger</span></p>
+    <div class="gold-rule st"><span class="gri">✨</span></div>
+    <div class="scratch-box st" id="scratchBox">
+      <div class="scratch-reveal">
+        <div style="font-size:30px">❤️</div>
+        <div class="s-date-big">12 May</div>
+        <div class="s-date-big" style="font-size:28px">2026</div>
+        <div class="s-date-day">
+          <span data-hi-i>मंगलवार • शुभ मुहूर्त</span><span data-en-i>Tuesday • Shubh Muhurta</span>
+        </div>
+      </div>
+      <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
+    </div>
+    <div class="scratch-hint st" id="scratchHint">
+      <span data-hi-i>↑ यहाँ खरोंचें ↑</span><span data-en-i>↑ scratch here ↑</span>
+    </div>
+  </section>
+
+
+  <!-- ── GALLERY ── -->
+  <section class="gallery-section">
+    <div class="gallery-header">
+      <h2 class="st"><span data-hi-i>प्रेम की झलकियाँ</span><span data-en-i>Glimpses of Love</span></h2>
+      <p  class="st"><span data-hi-i>हमारी यादें</span><span data-en-i>Our precious memories</span></p>
+    </div>
+
+    <div class="g-carousel" id="gCarousel">
+      <div class="g-track" id="gTrack">
+       <div class="g-slide" data-i="0">
+  <img src="E:\New folder\Jyoti's Engagement\New folder\SNV_6326.JPG" class="gallery-img">
+</div>
+<div class="g-slide" data-i="0">
+  <img src="E:\New folder\Jyoti's Engagement\New folder\SNV_6326.JPG" class="gallery-img">
+</div>        
+<div class="g-slide" data-i="0">
+  <img src="E:\New folder\Jyoti's Engagement\New folder\SNV_6326.JPG" class="gallery-img">
+</div>        
+<div class="g-slide" data-i="0">
+  <img src="E:\New folder\Jyoti's Engagement\New folder\SNV_6326.JPG" class="gallery-img">
+</div>        
+<div class="g-slide" data-i="0">
+  <img src="E:\New folder\Jyoti's Engagement\New folder\SNV_6326.JPG" class="gallery-img">
+</div>        
+<div class="g-slide" data-i="0">
+  <img src="E:\New folder\Jyoti's Engagement\New folder\SNV_6326.JPG" class="gallery-img">
+</div>        
+<div class="g-slide" data-i="0">
+  <img src="E:\New folder\Jyoti's Engagement\New folder\SNV_6326.JPG" class="gallery-img">
+</div>      </div>
+    </div>
+
+    <div class="g-arrows">
+      <div class="g-arrow" onclick="galMove(-1)">‹</div>
+      <div class="g-arrow" onclick="galMove(1)">›</div>
+    </div>
+    <div class="g-dots" id="gDots"></div>
+  </section>
+
+  <!-- ── TIMELINE ── -->
+  <section class="timeline-section dark-sec">
+    <h2 class="sec-title st"><span data-hi>विवाह का कार्यक्रम</span><span data-en>Wedding Programme</span></h2>
+    <p  class="sec-sub  st"><span data-hi>उत्सव की पूरी झलक</span><span data-en>complete schedule</span></p>
+    <div class="gold-rule st"><span class="gri">📅</span></div>
+
+    <div class="tl-wrap">
+
+      <div class="tl-item ev-haldi tl-el">
+        <div class="tl-card">
+          <div class="tl-ev-name"><span data-hi-i>हल्दी</span><span data-en-i>Haldi Ceremony</span></div>
+          <div class="tl-date">10 May 2026 · Sunday</div>
+          <div class="tl-time">⏰ 10:00 AM – 1:00 PM</div>
+          <div class="tl-place">📍 <span data-hi-i>बनियारा, हँसडीहा</span><span data-en-i>At our Residence, Baniyara</span></div>
+          <div class="tl-desc"><span data-hi-i>पवित्र हल्दी से वर-वधू को नहलाकर परिवार के साथ आशीर्वाद दें।</span><span data-en-i>Bless the couple with sacred turmeric in a cherished family ritual.</span></div>
+        </div>
+        <div class="tl-dot">🌿</div>
+      </div>
+
+      <div class="tl-item ev-mehendi tl-el">
+        <div class="tl-card">
+          <div class="tl-ev-name"><span data-hi-i>मेहंदी</span><span data-en-i>Mehendi Night</span></div>
+          <div class="tl-date">10 May 2026 · Sunday</div>
+          <div class="tl-time">⏰ 7:00 PM – 11:00 PM</div>
+          <div class="tl-place">📍 <span data-hi-i>बनियारा, हँसडीहा</span><span data-en-i>At our Residence, Baniyara</span></div>
+          <div class="tl-desc"><span data-hi-i>हाथों पर मेहंदी लगाइए और महिला संगीत का आनंद लीजिए।</span><span data-en-i>Adorn hands with henna while celebrating with ladies' folk songs.</span></div>
+        </div>
+        <div class="tl-dot">🌺</div>
+      </div>
+
+      <div class="tl-item ev-sangeet tl-el">
+        <div class="tl-card">
+          <div class="tl-ev-name"><span data-hi-i>संगीत संध्या</span><span data-en-i>Sangeet Night</span></div>
+          <div class="tl-date">10 May 2026 · Sunday</div>
+          <div class="tl-time">⏰ 7:00 PM – 11:00 PM</div>
+          <div class="tl-place">📍 <span data-hi-i>बनियारा, हँसडीहा</span><span data-en-i>At our Residence, Baniyara</span></div>
+          <div class="tl-desc"><span data-hi-i>ढोल, शहनाई और नगाड़े की धुन पर नृत्य और गान — अविस्मरणीय रात।</span><span data-en-i>Dance to dhol, shehnai and nagara. An absolutely unforgettable night.</span></div>
+        </div>
+        <div class="tl-dot">🥁</div>
+      </div>
+
+      <div class="tl-item ev-satsang tl-el">
+        <div class="tl-card">
+          <div class="tl-ev-name"><span data-hi-i>सत्संग</span><span data-en-i>Satsang &amp; Prayers</span></div>
+          <div class="tl-date">11 May 2026 · Monday</div>
+          <div class="tl-time">⏰ 8:00 AM – 12:00 AM</div>
+          <div class="tl-place">📍 <span data-hi-i>बनियारा, हँसडीहा</span><span data-en-i>At our Residence, Baniyara</span></div>
+          <div class="tl-desc"><span data-hi-i>भजन-कीर्तन और प्रभु भक्ति से विवाह का शुभारंभ करें।</span><span data-en-i>Begin the wedding day with devotional bhajans and divine blessings.</span></div>
+        </div>
+        <div class="tl-dot">🙏</div>
+      </div>
+
+      <div class="tl-item ev-mandap tl-el">
+        <div class="tl-card">
+          <div class="tl-ev-name"><span data-hi-i>मण्डप पूजन</span><span data-en-i>Mandap Pujan</span></div>
+          <div class="tl-date">11 May 2026 · Monday</div>
+          <div class="tl-time">⏰ 5:00 PM – 10:30 PM</div>
+          <div class="tl-place">📍 <span data-hi-i>बनियारा, हँसडीहा</span><span data-en-i>At our Residence, Baniyara</span></div>
+          <div class="tl-desc"><span data-hi-i>वैदिक मंत्रों के साथ मंडप स्थापना और विवाह स्थल का पवित्रीकरण।</span><span data-en-i>Setting up the sacred mandap with Vedic chants and consecrating the venue.</span></div>
+        </div>
+        <div class="tl-dot">🔱</div>
+      </div>
+
+      <div class="tl-item ev-vivah tl-el">
+        <div class="tl-card">
+          <div class="tl-ev-name"><span data-hi-i>शुभ विवाह</span><span data-en-i>Shubh Vivah</span></div>
+          <div class="tl-date">12 May 2026 · Tuesday</div>
+          <div class="tl-time">⏰ 7:00 PM – 2:00 AM</div>
+          <div class="tl-place">📍 <span data-hi-i>होटल वृन्दावन, गोड्डा</span><span data-en-i> Hotel Vrindavan, Godda</span></div>
+          <div class="tl-desc"><span data-hi-i>जय माला, कन्यादान, सप्तपदी और फेरे — दो आत्माओं का पवित्र मिलन।</span><span data-en-i>Jaimala, Kanyadan, Saptapadi &amp; Pheras — the sacred union of two souls.</span></div>
+        </div>
+        <div class="tl-dot">❤️</div>
+      </div>
+
+      <div class="tl-item ev-reception tl-el">
+        <div class="tl-card">
+          <div class="tl-ev-name"><span data-hi-i>प्रीतिभोज</span><span data-en-i>Dinner</span></div>
+          <div class="tl-date">12 May 2026 · Tuesday</div>
+          <div class="tl-time">⏰ <span data-hi-i>7 बजे से आपके आगमन तक</span><span data-en-i>7:00 PM Onwards</span></div>
+          <div class="tl-place">📍 <span data-hi-i>होटल वृन्दावन, गोड्डा</span><span data-en-i> Hotel Vrindavan, Godda</span></div>
+          <div class="tl-desc"><span data-hi-i>नवविवाहित का भव्य स्वागत — भोज, नृत्य और खुशियों का जश्न।</span><span data-en-i>Grand welcome for the newlyweds. Feast, dance and joyous celebration.</span></div>
+        </div>
+        <div class="tl-dot">🎊</div>
+      </div>
+
+    </div><!-- /tl-wrap -->
+  </section>
+
+  <!-- ── CALENDAR ── -->
+  <section class="calendar-section section">
+    <h2 class="sec-title st"><span data-hi>विवाह तिथि</span><span data-en>Wedding Date</span></h2>
+    <div class="gold-rule st"><span class="gri">📅</span></div>
+    <div class="cal-wrap st">
+      <div class="cal-hdr">
+        <div class="cal-month"><span data-hi-i>मई</span><span data-en-i>May</span></div>
+        <div class="cal-year">2026</div>
+      </div>
+      <div class="cal-grid">
+        <div class="cal-dname"><span data-hi-i>रवि</span><span data-en-i>Sun</span></div>
+        <div class="cal-dname"><span data-hi-i>सोम</span><span data-en-i>Mon</span></div>
+        <div class="cal-dname"><span data-hi-i>मंगल</span><span data-en-i>Tue</span></div>
+        <div class="cal-dname"><span data-hi-i>बुध</span><span data-en-i>Wed</span></div>
+        <div class="cal-dname"><span data-hi-i>गुरु</span><span data-en-i>Thu</span></div>
+        <div class="cal-dname"><span data-hi-i>शुक्र</span><span data-en-i>Fri</span></div>
+        <div class="cal-dname"><span data-hi-i>शनि</span><span data-en-i>Sat</span></div>
+        <div></div><div></div><div></div><div></div><div></div><div class="cal-d">1</div><div class="cal-d">2</div><div class="cal-d">3</div><div class="cal-d">4</div><div class="cal-d">5</div><div class="cal-d">6</div><div class="cal-d">7</div>
+        <div class="cal-d">8</div><div class="cal-d">9</div><div class="cal-d range">10</div><div class="cal-d range">11</div><div class="cal-d wedding">12</div><div class="cal-d">13</div><div class="cal-d">14</div>
+        <div class="cal-d">15</div><div class="cal-d">16</div><div class="cal-d">17</div><div class="cal-d">18</div><div class="cal-d">19</div><div class="cal-d">20</div><div class="cal-d">21</div>
+        <div class="cal-d">22</div><div class="cal-d">23</div><div class="cal-d">24</div><div class="cal-d">25</div><div class="cal-d">26</div><div class="cal-d">27</div><div class="cal-d">28</div><div class="cal-d">29</div><div class="cal-d">30</div><div class="cal-d">31</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MAP ── -->
+  <section class="map-section section">
+    <h2 class="sec-title st"><span data-hi>विवाह स्थल</span><span data-en>Venue &amp; Location</span></h2>
+    <div class="gold-rule st"><span class="gri">📍</span></div>
+    <div class="map-wrap st">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d905.2525760451216!2d87.20673269664616!3d24.829321230488482!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f0f4df4b6dc819%3A0x820f81da1a4b547f!2sVrindavan%20Hotel!5e0!3m2!1sen!2sin!4v1778085737926!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div class="venue-bar">
+        <div class="v-item"><span class="v-icon">🏛️</span><div class="v-label"><span data-hi-i>स्थल</span><span data-en-i>Venue</span></div><div class="v-val"><span data-hi-i>होटल वृन्दावन</span><span data-en-i>Hotel Vrindavan</span></div></div>
+        <div class="v-item"><span class="v-icon">📍</span><div class="v-label"><span data-hi-i>पता</span><span data-en-i>Address</span></div><div class="v-val"><span data-hi-i>गोड्डा, झारखण्ड</span><span data-en-i>Godda, Jharkhand</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DRESS CODE ── -->
+  <section class="dresscode-section section">
+    <h2 class="sec-title st"><span data-hi>वेशभूषा संहिता</span><span data-en>Dress Code</span></h2>
+    <p  class="sec-sub  st"><span data-hi>उत्सव के रंग</span><span data-en>colours of celebration</span></p>
+    <div class="gold-rule st"><span class="gri">🎨</span></div>
+    <div class="dress-grid">
+      <div class="dress-card ec"><span class="dc-icon">🌿</span><div class="dc-event"><span data-hi-i>हल्दी</span><span data-en-i>Haldi</span></div><div class="dc-code">Yellow &amp; Green</div><div class="dc-swatches"><div class="swatch" style="background:#F5A623"></div><div class="swatch" style="background:#F0C060"></div><div class="swatch" style="background:#2D6A4F"></div></div></div>
+      <div class="dress-card ec"><span class="dc-icon">🌺</span><div class="dc-event"><span data-hi-i>मेहंदी</span><span data-en-i>Mehendi</span></div><div class="dc-code">Green &amp; Pink</div><div class="dc-swatches"><div class="swatch" style="background:#2D6A4F"></div><div class="swatch" style="background:#D4527A"></div><div class="swatch" style="background:#9B2D7A"></div></div></div>
+      <div class="dress-card ec"><span class="dc-icon">🥁</span><div class="dc-event"><span data-hi-i>संगीत</span><span data-en-i>Sangeet</span></div><div class="dc-code">Royal &amp; Gold</div><div class="dc-swatches"><div class="swatch" style="background:#3D2B7A"></div><div class="swatch" style="background:#C9922A"></div><div class="swatch" style="background:#9B2D7A"></div></div></div>
+      <div class="dress-card ec"><span class="dc-icon">❤️</span><div class="dc-event"><span data-hi-i>विवाह</span><span data-en-i>Wedding</span></div><div class="dc-code">Traditional Ethnic</div><div class="dc-swatches"><div class="swatch" style="background:#7B1C2E"></div><div class="swatch" style="background:#C9922A"></div><div class="swatch" style="background:#D4527A"></div></div></div>
+    </div>
+  </section>
+
+
+
+    <!-- ── COUNTDOWN ── -->
+  <section class="countdown-section">
+    <h2 class="sec-title st"><span data-hi>शुभ घड़ी की उलटी गिनती</span><span data-en>Countdown to the Big Day</span></h2>
+    <div class="gold-rule st"><span class="gri">🎊</span></div>
+    <div class="cd-grid st">
+      <div class="cd-item"><span class="cd-num" id="cdD">--</span><span class="cd-lbl"><span data-hi-i>दिन</span><span data-en-i>Days</span></span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-item"><span class="cd-num" id="cdH">--</span><span class="cd-lbl"><span data-hi-i>घंटे</span><span data-en-i>Hours</span></span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-item"><span class="cd-num" id="cdM">--</span><span class="cd-lbl"><span data-hi-i>मिनट</span><span data-en-i>Mins</span></span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-item"><span class="cd-num" id="cdS">--</span><span class="cd-lbl"><span data-hi-i>सेकंड</span><span data-en-i>Secs</span></span></div>
+    </div>
+  </section>
+
+  <!-- ── BLESSINGS ── -->
+  <section class="blessings-section">
+    <div class="bl-quote st">
+      <span data-hi>दो दिल, एक जीवन — परमेश्वर के आशीर्वाद से जुड़े, परिवार के प्रेम से सँवरे</span>
+      <span data-en>Two hearts, one life — bound by divine blessings, nurtured by the love of family</span>
+    </div>
+    <div class="bl-sub st">✦ सप्तपदी &nbsp;·&nbsp; Saptapadi ✦</div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="ft-emoji st">🪔 ❤️ 🪔</div>
+    <div class="ft-names st"><span data-hi-i>ज्योति ❤ चंदन</span><span data-en-i>Jyoti ❤ Chandan</span></div>
+    <div class="ft-date  st">12 · 05 · 2026</div>
+    <div class="ft-rule"></div>
+    <p class="st" data-hi>आपकी उपस्थिति और आशीर्वाद से हमारा यह उत्सव और भी पावन होगा।</p>
+    <p class="st" data-en>Your presence and blessings will make this celebration even more sacred.</p>
+    <div style="margin-top:12px;opacity:1;font-size:15px;letter-spacing:1px"><span data-hi>सस्नेह <BR>❤ पंजियारा परिवार ❤</span>
+      <span data-en>WITH REGARDS<BR>❤ PANJIYARA FAMILY ❤</span></div>
+  </footer>
+
+</div><!-- /main-content -->
+
+<!-- ══════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════ -->
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ─── PETALS ─── */
+const petCont = document.getElementById('petals');
+['🌸','🌺','🌼','🌹','🌷','🪷','🌻'].forEach(sym => {
+  for(let j=0;j<3;j++){
+    const p=document.createElement('div');
+    p.className='petal';
+    p.textContent=sym;
+    p.style.cssText=`left:${Math.random()*100}%;font-size:${13+Math.random()*15}px;animation-duration:${5+Math.random()*9}s;animation-delay:${Math.random()*10}s`;
+    petCont.appendChild(p);
+  }
+});
+
+/* ─── OPEN INVITATION (CURTAIN) ─── */
+function openInvitation(){
+  const intro=document.getElementById('intro-screen');
+  const cLeft=document.getElementById('cLeft');
+  const cRight=document.getElementById('cRight');
+  const cTop=document.getElementById('curtain-top');
+  const main=document.getElementById('main-content');
+
+  // Disable the button
+  document.querySelector('.tap-btn').style.pointerEvents='none';
+
+  const tl=gsap.timeline();
+
+// 1. Show curtain + fade intro + start opening together
+tl.call(()=>{
+  document.getElementById('curtain-overlay').style.display='flex';
+  cTop.style.display='flex';
+  gsap.set([cLeft,cRight],{x:'0%',opacity:1});
+  gsap.set(cTop,{y:'0%',opacity:1});
+})
+
+// fade intro AND open curtains at same time
+.to(intro,{opacity:0,duration:0.8,ease:'power2.inOut'}, 0)
+
+.to(cLeft, {x:'-100%',duration:1.6,ease:'expo.inOut'}, 0)
+.to(cRight,{x:'100%', duration:1.6,ease:'expo.inOut'}, 0)
+.to(cTop,  {y:'-100%',duration:0.8,ease:'power3.inOut'}, 0.2)
+
+  // 2. Mount main silently
+  .call(()=>{
+    intro.style.display='none';
+    main.classList.add('visible');
+    document.getElementById('langToggle').style.display='flex';
+    document.getElementById('music-btn').style.display='flex';
+    initScratch();
+    initCountdown();
+  })
+
+  // 3. DRAMATIC OPEN — curtains sweep apart like a theatre
+  //.to(cLeft, {x:'-100%',duration:1.9,ease:'expo.inOut'},'>0.15')
+  //.to(cRight,{x:'100%', duration:1.9,ease:'expo.inOut'},'<')
+  //.to(cTop,  {y:'-100%',duration:0.9,ease:'power3.inOut'},'<0.5')
+
+  // 4. Hero content entrance
+  .fromTo('.hEl',
+    {opacity:0,y:55,scale:0.96},
+    {opacity:1,y:0,scale:1,duration:0.85,stagger:0.12,ease:'power3.out'},
+    '-=0.4'
+  )
+
+  // 5. Cleanup
+  .call(()=>{
+    document.getElementById('curtain-overlay').style.display='none';
+    cTop.style.display='none';
+    initGSAP();
+    initGallery();
+  });
+}
+
+/* ─── GSAP SCROLL ANIMATIONS ─── */
+function initGSAP(){
+  // Fade-up: all .st elements
+  gsap.utils.toArray('.st').forEach(el=>{
+    gsap.fromTo(el,
+      {opacity:0,y:42},
+      {opacity:1,y:0,duration:0.88,ease:'power3.out',
+       scrollTrigger:{trigger:el,start:'top 90%',once:true}}
+    );
+  });
+
+  // Cards stagger up
+  gsap.utils.toArray('.ec').forEach((el,i)=>{
+    gsap.fromTo(el,
+      {opacity:0,y:64,scale:0.93},
+      {opacity:1,y:0,scale:1,duration:0.78,delay:(i%3)*0.11,ease:'back.out(1.6)',
+       scrollTrigger:{trigger:el,start:'top 92%',once:true}}
+    );
+  });
+
+  // Timeline alternating slide-in
+  gsap.utils.toArray('.tl-el').forEach((el,i)=>{
+    gsap.fromTo(el,
+      {opacity:0,x: i%2===0 ? -65 : 65},
+      {opacity:1,x:0,duration:0.9,ease:'power3.out',
+       scrollTrigger:{trigger:el,start:'top 88%',once:true}}
+    );
+  });
+
+  // Section titles pinch scale
+  gsap.utils.toArray('.sec-title').forEach(el=>{
+    gsap.fromTo(el,
+      {opacity:0,scale:0.85},
+      {opacity:1,scale:1,duration:0.75,ease:'back.out(1.8)',
+       scrollTrigger:{trigger:el,start:'top 88%',once:true}}
+    );
+  });
+
+  // Gallery section parallax tint
+  gsap.to('.gallery-section',{
+    backgroundPositionY:'30%',
+    ease:'none',
+    scrollTrigger:{trigger:'.gallery-section',start:'top bottom',end:'bottom top',scrub:true}
+  });
+}
+
+/* ─── GALLERY CAROUSEL ─── */
+let galIdx=0, galTotal=0, galTimer=null, galDragging=false, galDragX=0, galDelta=0;
+
+function initGallery(){
+  const track=document.getElementById('gTrack');
+  const slides=track.querySelectorAll('.g-slide');
+  galTotal=slides.length;
+
+  // Build dots
+  const dotsEl=document.getElementById('gDots');
+  dotsEl.innerHTML='';
+  slides.forEach((_,i)=>{
+    const d=document.createElement('div');
+    d.className='g-dot'+(i===0?' active':'');
+    d.onclick=()=>galTo(i);
+    dotsEl.appendChild(d);
+  });
+
+  updateGal();
+  galTimer=setInterval(()=>galMove(1),3800);
+
+  const carousel=document.getElementById('gCarousel');
+
+  // Touch
+  carousel.addEventListener('touchstart',e=>{
+    galDragging=true; galDragX=e.touches[0].clientX; galDelta=0;
+    clearInterval(galTimer); track.style.transition='none';
+  },{passive:true});
+  carousel.addEventListener('touchmove',e=>{
+    if(!galDragging)return;
+    galDelta=e.touches[0].clientX-galDragX;
+    track.style.transform=`translateX(${galOffset(galIdx)+galDelta}px)`;
+  },{passive:true});
+  carousel.addEventListener('touchend',()=>{
+    galDragging=false; track.style.transition='';
+    if(galDelta<-55) galMove(1);
+    else if(galDelta>55) galMove(-1);
+    else updateGal();
+    galTimer=setInterval(()=>galMove(1),3800);
+  });
+
+  // Mouse drag
+  carousel.addEventListener('mousedown',e=>{
+    galDragging=true; galDragX=e.clientX; galDelta=0;
+    clearInterval(galTimer); track.style.transition='none';
+  });
+  window.addEventListener('mousemove',e=>{
+    if(!galDragging)return;
+    galDelta=e.clientX-galDragX;
+    track.style.transform=`translateX(${galOffset(galIdx)+galDelta}px)`;
+  });
+  window.addEventListener('mouseup',()=>{
+    if(!galDragging)return;
+    galDragging=false; track.style.transition='';
+    if(galDelta<-55) galMove(1);
+    else if(galDelta>55) galMove(-1);
+    else updateGal();
+    galTimer=setInterval(()=>galMove(1),3800);
+  });
+}
+
+function galOffset(idx){
+  const track=document.getElementById('gTrack');
+  const slide=track.querySelector('.g-slide');
+  const sw=slide.offsetWidth+18;
+  const cw=document.getElementById('gCarousel').offsetWidth;
+  return (cw/2)-(sw/2)-(idx*sw);
+}
+
+function updateGal(){
+  const track=document.getElementById('gTrack');
+  track.style.transform=`translateX(${galOffset(galIdx)}px)`;
+  track.querySelectorAll('.g-slide').forEach((s,i)=>s.classList.toggle('g-active',i===galIdx));
+  document.querySelectorAll('.g-dot').forEach((d,i)=>d.classList.toggle('active',i===galIdx));
+}
+
+function galMove(dir){
+  galIdx=(galIdx+dir+galTotal)%galTotal;
+  updateGal();
+}
+function galTo(i){
+  galIdx=i; updateGal();
+  clearInterval(galTimer); galTimer=setInterval(()=>galMove(1),3800);
+}
+
+/* ─── LANGUAGE ─── */
+function setLang(lang){
+  const main=document.getElementById('main-content');
+  main.classList.remove('lang-hi','lang-en');
+  main.classList.add('lang-'+lang);
+  document.querySelectorAll('.lang-btn').forEach(btn=>{
+    btn.classList.toggle('active',
+      (lang==='hi'&&btn.textContent.trim()==='हिंदी')||
+      (lang==='en'&&btn.textContent.trim()==='English')
+    );
+  });
+}
+
+/* ─── BACKGROUND MUSIC (Web Audio API — shehnai-like drone) ─── */
+let audioCtx=null, musicOn=false, musicTimer=null, noteStep=0;
+const raagNotes=[261.6,293.7,311.1,349.2,392,415.3,466.2,523.3,587.3,622.3,698.5,783.9];
+const rhythmPattern=[0,2,4,5,7,9,7,5,4,2,0,2];
+
+function playNote(){
+  if(!audioCtx||!musicOn)return;
+  const freq=raagNotes[noteStep%raagNotes.length];
+  noteStep++;
+  // Lead tone (sawtooth through bandpass = nasal shehnai-like)
+  const osc=audioCtx.createOscillator();
+  const filt=audioCtx.createBiquadFilter();
+  const gain=audioCtx.createGain();
+  filt.type='bandpass'; filt.frequency.value=freq*1.8; filt.Q.value=4;
+  osc.type='sawtooth'; osc.frequency.value=freq;
+  osc.connect(filt); filt.connect(gain); gain.connect(audioCtx.destination);
+  const now=audioCtx.currentTime;
+  gain.gain.setValueAtTime(0,now);
+  gain.gain.linearRampToValueAtTime(0.055,now+0.06);
+  gain.gain.exponentialRampToValueAtTime(0.001,now+0.55);
+  osc.start(now); osc.stop(now+0.6);
+  // Tanpura drone every 4 beats
+  if(noteStep%4===0){
+    const d=audioCtx.createOscillator();
+    const dg=audioCtx.createGain();
+    d.type='sine'; d.frequency.value=130.8;
+    d.connect(dg); dg.connect(audioCtx.destination);
+    dg.gain.setValueAtTime(0.018,now);
+    dg.gain.exponentialRampToValueAtTime(0.001,now+1.6);
+    d.start(now); d.stop(now+1.7);
+  }
+}
+
+function toggleMusic(){
+  const btn=document.getElementById('music-btn');
+  const wave=document.getElementById('mwave');
+  if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  if(!musicOn){
+    musicOn=true;
+    btn.innerHTML='🔊';
+    btn.appendChild(wave);
+    wave.style.display='flex';
+    btn.classList.remove('music-muted');
+    musicTimer=setInterval(playNote,400);
+    gsap.fromTo(btn,{scale:0.9},{scale:1,duration:0.35,ease:'back.out(2)'});
+  } else {
+    musicOn=false;
+    clearInterval(musicTimer);
+    btn.innerHTML='🔇';
+    btn.appendChild(wave);
+    wave.style.display='none';
+    btn.classList.add('music-muted');
+    gsap.to(btn,{scale:0.9,duration:0.2,yoyo:true,repeat:1});
+  }
+}
+
+/* ─── SCRATCH CARD ─── */
+function initScratch(){
+  const canvas=document.getElementById('scratchCanvas');
+  const box=document.getElementById('scratchBox');
+  const hint=document.getElementById('scratchHint');
+  const w=box.offsetWidth, h=box.offsetHeight;
+  canvas.width=w; canvas.height=h;
+  const ctx=canvas.getContext('2d');
+
+  const g=ctx.createLinearGradient(0,0,w,h);
+  g.addColorStop(0,'#C9922A'); g.addColorStop(0.28,'#F0C060');
+  g.addColorStop(0.5,'#E8630A'); g.addColorStop(0.78,'#C9922A'); g.addColorStop(1,'#F0C060');
+  ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
+  ctx.fillStyle='rgba(74,14,26,0.22)';
+  ctx.font='bold 12px serif'; ctx.textAlign='center';
+  for(let y=24;y<h;y+=26) for(let x=50;x<w;x+=100) ctx.fillText('✦ खरोंचें ✦',x,y);
+
+  ctx.globalCompositeOperation='destination-out';
+  let drawing=false;
+
+  const pos=(e)=>{ const r=canvas.getBoundingClientRect(); const t=e.touches?e.touches[0]:e; return{x:t.clientX-r.left,y:t.clientY-r.top}; };
+  const draw=(e)=>{
+    if(!drawing)return; e.preventDefault();
+    const p=pos(e);
+    ctx.beginPath(); ctx.arc(p.x,p.y,24,0,Math.PI*2); ctx.fill();
+    const d=ctx.getImageData(0,0,w,h).data;
+    let t=0; for(let i=3;i<d.length;i+=4) if(d[i]<128) t++;
+    if(t/(w*h)>0.5){
+      ctx.clearRect(0,0,w,h);
+      canvas.style.pointerEvents='none'; hint.style.opacity='0';
+      gsap.to(box,{boxShadow:'0 0 0 4px #F0C060, 0 14px 55px rgba(201,146,42,0.65)',duration:0.6});
+      gsap.fromTo(box,{scale:1},{scale:1.04,duration:0.25,yoyo:true,repeat:1,ease:'power2.inOut'});
+    }
+  };
+  canvas.addEventListener('mousedown',e=>{drawing=true;draw(e);});
+  canvas.addEventListener('mousemove',draw);
+  canvas.addEventListener('mouseup',()=>drawing=false);
+  canvas.addEventListener('touchstart',e=>{drawing=true;draw(e);},{passive:false});
+  canvas.addEventListener('touchmove',draw,{passive:false});
+  canvas.addEventListener('touchend',()=>drawing=false);
+}
+
+/* ─── COUNTDOWN ─── */
+function initCountdown(){
+  const target=new Date('2026-05-12T11:00:00');
+  const pad=n=>String(n).padStart(2,'0');
+  const tick=()=>{
+    const diff=target-new Date();
+    if(diff<=0){ ['cdD','cdH','cdM','cdS'].forEach(id=>document.getElementById(id).textContent='00'); return; }
+    document.getElementById('cdD').textContent=pad(Math.floor(diff/86400000));
+    document.getElementById('cdH').textContent=pad(Math.floor((diff%86400000)/3600000));
+    document.getElementById('cdM').textContent=pad(Math.floor((diff%3600000)/60000));
+    document.getElementById('cdS').textContent=pad(Math.floor((diff%60000)/1000));
+  };
+  tick(); setInterval(tick,1000);
+}
+
+</script>
+</body>
+</html>
