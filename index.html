@@ -281,14 +281,12 @@ body {
 
 /* PREMIUM VOLUME SLIDER */
 
+
 #volumeSlider{
-
   -webkit-appearance:none;
-
   appearance:none;
 
   width:100%;
-
   height:8px;
 
   border-radius:20px;
@@ -299,17 +297,15 @@ body {
 
   cursor:pointer;
 
-  touch-action:pan-x;
-
   margin:12px 0;
+
+  touch-action:none;
 }
 
 /* TRACK */
 
 #volumeSlider::-webkit-slider-runnable-track{
-
   height:8px;
-
   border-radius:20px;
 
   background:linear-gradient(
@@ -322,36 +318,37 @@ body {
 /* THUMB */
 
 #volumeSlider::-webkit-slider-thumb{
-
   -webkit-appearance:none;
-
   appearance:none;
 
-  width:28px;
-
-  height:28px;
+  width:24px;
+  height:24px;
 
   border-radius:50%;
 
   background:var(--gold-light);
 
-  border:3px solid white;
+  border:2px solid white;
 
-  margin-top:-10px;
+  margin-top:-8px;
 
   cursor:pointer;
 
   box-shadow:
-    0 0 15px rgba(240,192,96,0.7),
-    0 4px 12px rgba(0,0,0,0.35);
-
-  transition:transform 0.2s;
+    0 0 12px rgba(240,192,96,0.7),
+    0 4px 10px rgba(0,0,0,0.35);
 }
 
-#volumeSlider::-webkit-slider-thumb:active{
+/* FIREFOX */
 
-  transform:scale(1.15);
+#volumeSlider::-moz-range-thumb{
+  width:24px;
+  height:24px;
+  border:none;
+  border-radius:50%;
+  background:var(--gold-light);
 }
+
    
 /* ══════════════════════════════════════════════
    MUSIC BUTTON
@@ -887,7 +884,21 @@ footer {
   *{
     max-width:100%;
   }
+  #volumeSlider{
+    height:14px;
+  }
 
+  #volumeSlider::-webkit-slider-runnable-track{
+    height:14px;
+  }
+
+  #volumeSlider::-webkit-slider-thumb{
+    width:26px;
+    height:26px;
+
+    margin-top:-6px;
+  }
+}
   .ev-grid{
     grid-template-columns:1fr;
   }
