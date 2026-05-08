@@ -237,18 +237,19 @@ body {
 /* Popup Slider */
 
 #volume-popup{
+
   position:absolute;
 
   bottom:62px;
   right:0;
 
-  width:140px;
+  width:170px;
 
-  padding:14px;
+  padding:18px;
 
-  border-radius:16px;
+  border-radius:18px;
 
-  background:rgba(21,4,8,0.92);
+  background:rgba(21,4,8,0.96);
 
   border:1px solid rgba(201,146,42,0.35);
 
@@ -257,24 +258,39 @@ body {
   opacity:0;
   visibility:hidden;
 
-  transform:translateY(10px);
+  transform:translateY(10px) scale(0.95);
 
   transition:all 0.3s;
+
+  z-index:9999;
+
+  pointer-events:none;
 }
    
 #volume-wrapper.active #volume-popup{
+
   opacity:1;
+
   visibility:visible;
-  transform:translateY(0);
+
+  transform:translateY(0) scale(1);
+
+  pointer-events:auto;
 }
 
 /* Slider */
 
 #volumeSlider{
+
   width:100%;
-  height:42px;
+
+  height:50px;
 
   cursor:pointer;
+
+  touch-action:auto;
+
+  pointer-events:auto;
 
   -webkit-appearance:none;
 
@@ -1702,6 +1718,10 @@ window.addEventListener('load',()=>{
 
   const btn = document.getElementById('volume-btn');
 
+  const popup = document.getElementById('volume-popup');
+
+  /* Toggle Popup */
+
   btn.addEventListener('click',(e)=>{
 
     e.stopPropagation();
@@ -1710,19 +1730,23 @@ window.addEventListener('load',()=>{
 
   });
 
-  /* Click outside closes popup */
+  /* Prevent closing when touching popup */
 
-  document.addEventListener('click',(e)=>{
+  popup.addEventListener('click',(e)=>{
 
-    if(!wrapper.contains(e.target)){
-
-      wrapper.classList.remove('active');
-
-    }
+    e.stopPropagation();
 
   });
 
-});   
+  /* Outside click closes */
+
+  document.addEventListener('click',()=>{
+
+    wrapper.classList.remove('active');
+
+  });
+
+});
 
 </script>
 
