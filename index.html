@@ -1800,6 +1800,25 @@ window.addEventListener('load',()=>{
 
 });
 
+   const volumeSlider = document.getElementById("volumeSlider");
+
+volumeSlider.addEventListener("input", function () {
+  bgMusic.volume = this.value / 100;
+});
+
+/* MOBILE TOUCH FIX */
+volumeSlider.addEventListener(
+  "touchstart",
+  e => e.stopPropagation(),
+  { passive: true }
+);
+
+volumeSlider.addEventListener(
+  "touchmove",
+  e => e.stopPropagation(),
+  { passive: true }
+);
+
 </script>
 
    <audio id="bgMusic" loop>
